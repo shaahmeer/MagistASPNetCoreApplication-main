@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Controllers",
+    "\\Database",
+    "\\Models",
+    "\\obj",
+    "\\Views",
+    "\\Views\\Home"
+  ],
+  "SelectedNode": "\\Models\\SendMessage.cs",
+  "PreviewInSolutionExplorer": false
+}

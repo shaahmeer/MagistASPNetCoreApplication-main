@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Office";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center">Welcome to your private office!</h1>
+    <p class="text-center">Здарова, @ViewData["name"]!</p>
+
+    <form method="post" asp-action="Office" asp-controller="Office" class="my-form p-4 border rounded">
+        <p class="mb-3">Напиши кому-нибудь</p>
+        <div class="mb-3">
+            <label class="form-label">Кому:</label>
+            <input asp-for="To" class="form-control" name="To" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Заголовок:</label>
+            <input asp-for="Title" class="form-control" name="Title" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Текст:</label>
+            <textarea asp-for="Text" class="form-control" name="Text"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+        @ViewData["Message"]
+    </form>
+
+    <form method="get" asp-action="Office" asp-controller="Office" class="my-form p-4 border rounded">
+        <div class="mb-3">
+            <label class="form-label">Фильтровать</label>
+            <input type="checkbox" name="Status" asp-for="Status" class="form-check-input" />
+        </div>
+        <button type="submit" class="btn btn-secondary">Сохранить</button>
+    </form>
+
+    <table class="table my-table">
+        <thead>
+            <tr>
+                <th>Тема</th>
+                <th>Дата</th>
+                <th>От</th>
+                <th>Сообщение</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="@(item.Status ? "seen-true" : "seen-false")">
+                    <td>
+                        <a href="#" data-id="@item.Id" onClick='alert("@item.Text")'>@item.Title</a>
+                    </td>
+                    <td>@item.Date</td>
+                    <td>@item.From</td>
+                    <td>@item.Text</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
